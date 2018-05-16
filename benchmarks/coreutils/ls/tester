@@ -1,0 +1,17 @@
+echo "USER SYSTEM" | tee ls_results
+
+echo "Vanilla" | tee -a ls_results
+for i in {1..100}
+do
+    /usr/bin/time -a -o ls_results -f "%U %S" ../vanilla/ls -lah ./ls_test >/dev/null
+    tail -n1 ls_results
+done
+
+echo "" | tee -a ls_results
+
+echo "MemGuard" | tee -a ls_results
+for i in {1..100}
+do
+    /usr/bin/time -a -o ls_results -f "%U %S" ../memguard/ls -lah ./ls_test >/dev/null
+    tail -n1 ls_results
+done

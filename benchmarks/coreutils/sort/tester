@@ -1,0 +1,16 @@
+echo "USER SYSTEM" | tee sort_results
+
+echo "Vanilla" | tee -a sort_results
+for i in {1..100}
+do
+    /usr/bin/time -a -o sort_results -f "%U %S" ../vanilla/sort r > /dev/null
+    tail -n1 sort_results
+done
+
+echo "" | tee -a sort_results
+echo "MemGuard" | tee -a sort_results
+for i in {1..100}
+do
+    /usr/bin/time -a -o sort_results -f "%U %S" ../memguard/sort r > /dev/null
+    tail -n1 sort_results
+done

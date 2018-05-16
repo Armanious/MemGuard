@@ -1,0 +1,81 @@
+
+1. Disable cmov instructions [X86Subtarget --> declare Cmov as unavailable is MemGuard is enabled]
+2. Reserve some register, one of r12-r15; reserved r15 if MemGuard is enabled [X86RegisterInfo.cpp:522]
+3. Instrument all memory read/writes that use at least one non-(rsp/rip on x86-64)/(esp/eip on x86) register [selecting correctly]
+   a. Vanilla instrumentation [done]
+      i. cmp reg, limit; jg nextBlock; mov reg, r15; call memguard_violation; nextBlock: ... [DONE]
+   c. Intel MPX instrumentation [DONE]
+      i. bndcl rem/mem; ...
+4. save registers on violation function [DONE]
+
+
+We have some instruction that can store/load memory.
+We just need to check if it is strictly esp-relative. I.e. if there's a non-esp register used, then instrument it.
+
+To instrument it, we have the MemOperand that it will try to work on. So, if that MemOperand needs to be LEA'd, we do
+that into r15. Otherwise, we take the register it's already in, shove it into a cmp, jump if gte, and call the error function
+on a violation.
+
+
+
+Remaining TODOs
+- REMOVE CMOV'S FFS [DONE]
+	New strategy:
+		- For a given set of coalesced instrumentation instructions:
+			- if there is any non-cmov memory operand displacement equal to the minimum of the group, do nothing differently
+			- if the minimum displacement of the group is due to solely the 1 (or more) cmov instruction, unfold all cmov's with that bound and REMOVE them from the group such that there is a new group minimum...
+- Enable support for multiple compilation units
+	HOW: set memguard_ctor and memguard_violation to do nothing by default
+
+- OpenSSL test [IN PROGRESS]
+- Try to get MPX to work as a POC [HOW???]
+- gracefully terminate on mmap entry failure [DONE]
+
+
+
+[+] CONCRETE NEXT STEPS
+
+Steps taken to install and test OpenSSL:
+1. Install our modified clang compiler
+2. Compile original OpenSSL (using our now system-wide modified clang) without enabling MemGuard
+[] Compile MemGuard-prepared libressl (load project into CLion), this time enabling MemGuard during compilation
+	NEED TO MODIFY:
+		openssl/mem_sec.c:everything
+		openssl/mem.c:CRYPTO_malloc
+4. Run OpenSSL, adde __safe_XXX version of methods as needed, and repeat
+5. Stress test (how?)
+
+
+Typical Configuration Commands:
+	../configure CC=clang CFLAGS="-O3 -fPIC -pie -fomit-frame-pointer -g -ggdb -mllvm -x86-memguard -mllvm -x86-memguard-violation-handler=memguard_violation" LDFLAGS="-fPIC -pie -g -ggdb /home/david/MemGuard/mgv.o"
+	
+	../configure CC=clang CFLAGS="-O3 -fPIC -pie -fomit-frame-pointer -g -ggdb" LDFLAGS="-g -ggdb"
+
+
+
+Nginx Configuration Commands
+	./configure --with-cc=/home/david/MemGuard/llvm/cmake-build/bin/clang --with-cc-opt="-O3 -fPIC -fomit-frame-pointer -g -ggdb -mllvm -x86-memguard -mllvm -x86-memguard-violation-handler=memguard_violation" --with-ld-opt="-O3 -fPIC -pie -g -ggdb /home/david/MemGuard/mgv.o" --without-http_rewrite_module --without-http_gzip_module --prefix=/home/david/nginx
+
+	./configure --with-cc=/home/david/MemGuard/llvm/cmake-build/bin/clang --with-cc-opt="-O3 -fPIC -fPIC -fomit-frame-pointer -g -ggdb" --with-ld-opt="-O3 -fPIC -pie -g -ggdb" --without-http_rewrite_module --without-http_gzip_module --prefix=/home/david/nginx
+
+
+BUGS
+- spilling %rdi (so, liveness code in general?) (lh_insert for example in lt-openssl)
+	- FIXED, don't use CMOV adapted code
+- pushing/popping flags: should only pop if EFLAGS is LIVE at or after the instruction, including the instruction being instrumented itself; also EFLAGS liveness because if the next instruction defines it, it's dead (liveness same with rdi; rdi was used immediately after instrumentation but we thought it was dead and did not need to spill it)
+	- FIXED, don't use CMOV adapted code
+
+- sometimes generated code has something like -0x8(%rsp) but that will get overriden by a PUSHF/POPF!!!!
+	- FIXED, LLVM optimizes function to not update %rsp by subtracting/adding to it when in a leaf function that uses at most 128 bytes of stack (the "red zone"); simply inserted another condition that MemGuard is NOT enabled as a precondition for this optimization (X86FrameLowering.cpp)
+
+- unknown bug with libressl...md5 ctx->update == null!  :(
+	- BUG: optimizing LEA because it's in active set because it wasn't removed from the active set following a CALL isntruction (which killed the associated registers)
+	- FIXED: remove clobbered registers when it's a call instruction
+
+	HAND-CHECK correctness (CMOV rewriting)
+		musl ptrace
+		openutils src/copy.o
+
+BUGS:
+	lt-openssl example of memory references that SHOULD be coalesced that are NOT yet getting coalesced
+		PENDING; fix idea: rewrite FindInstrumentationPoints so that (1) finds them all naively then (2) backwards through basic blocks only removing if the code path is guaranteed to be taken and the register is not redefined between the two references. Repeat (2) until no change.

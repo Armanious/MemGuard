@@ -1,0 +1,6 @@
+2018/05/05 20:38:00 [emerg] 12883#0: bind() to 0.0.0.0:80 failed (13: Permission denied)
+2018/05/05 20:38:10 [emerg] 12892#0: chown("/home/david/MemGuard/examples/nginx-1.14.0_vanilla/client_body_temp", 65534) failed (1: Operation not permitted)
+2018/05/05 20:39:10 [emerg] 12942#0: chown("/home/david/MemGuard/examples/nginx-1.14.0_vanilla/client_body_temp", 65534) failed (1: Operation not permitted)
+2018/05/05 20:42:10 [emerg] 13037#0: chown("/home/david/MemGuard/examples/nginx-1.14.0_vanilla/client_body_temp", 65534) failed (1: Operation not permitted)
+2018/05/05 20:42:43 [emerg] 13053#0: bind() to 0.0.0.0:80 failed (13: Permission denied)
+2018/05/05 20:42:45 [emerg] 13055#0: chown("/home/david/MemGuard/examples/nginx-1.14.0_vanilla/client_body_temp", 65534) failed (1: Operation not permitted)

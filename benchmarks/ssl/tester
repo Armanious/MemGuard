@@ -1,0 +1,8 @@
+echo "OpenSSL Results" | tee ssl_results
+echo "Vanilla" | tee -a ssl_results
+./openssl_v speed -mr | tee -a ssl_results
+
+echo "" | tee -a ssl_results
+echo "MemGuard" | tee -a ssl_results
+./openssl_mg speed -mr | tee -a ssl_results
+

@@ -1,0 +1,30 @@
+cd coreutils
+
+    cd ls
+        echo "benchmarking ls..."
+#       ./tester
+    cd ..
+
+    cd sort
+        echo "benchmarking sort..."
+#       ./tester
+    cd ..
+
+cd ..
+
+
+
+cd nginx
+    
+    echo "benchmarking nginx..."
+    ./tester
+
+cd ..
+
+
+cd ssl
+
+    echo "benchmarking ssl..."
+    ./tester
+
+cd ..

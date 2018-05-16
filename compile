@@ -1,0 +1,61 @@
+# Get the actual directory of this script
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do 
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" 
+done
+DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+
+# Include headers, targeted debug information, and -fPIC/-pie flag
+if [[ "`uname`" == "Darwin" ]]; then
+    CFLAGS="$CFLAGS -I/usr/local/include"
+    CFLAGS="$CFLAGS -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.sdk/usr/include"
+    CFLAGS="$CFLAGS -glldb"
+    CFLAGS="$CFLAGS -fPIE"
+    CMAKE_DIR="cmake-build-debug"
+    SIGUSR2="31"
+else
+    CFLAGS="$CFLAGS -ggdb"
+    CFLAGS="$CFLAGS -pie"
+    CMAKE_DIR="cmake-build"
+    SIGUSR2="12"
+fi
+
+
+# General CFLAGS:
+CFLAGS="$CFLAGS -fPIC -fomit-frame-pointer -g -fdebug-macro"
+
+
+# Debugging
+# CFLAGS="$CFLAGS -mllvm -debug"
+
+
+# MemGuard Options
+  CFLAGS="$CFLAGS -mllvm -x86-memguard"
+
+# CFLAGS="$CFLAGS -mllvm -x86-memguard-mmap-min-addr=65536"
+# CFLAGS="$CFLAGS -mllvm -x86-memguard-safe-region-size=67108864"
+  CFLAGS="$CFLAGS -mllvm -x86-memguard-initialization-function=main"
+# CFLAGS="$CFLAGS -mllvm -x86-memguard-initialize-safe-region"
+
+
+# CFLAGS="$CFLAGS -mllvm -x86-memguard-violation-reporting=function-call"
+# CFLAGS="$CFLAGS -mllvm -x86-memguard-violation-handler=memguard_violation"
+
+# CFLAGS="$CFLAGS -mllvm -x86-memguard-violation-reporting=raise-signal"
+# CFLAGS="$CFLAGS -mllvm -x86-memguard-violation-signal=$SIGUSR2"
+
+  CFLAGS="$CFLAGS -mllvm -x86-memguard-violation-reporting=mpx"
+# CLFAGS="$CFLAGS -mllvm -x86-memguard-mpx-register=bnd0"
+
+
+# Optimization Level
+  CFLAGS="$CFLAGS -O3"
+
+
+
+# Spit out the command for use...
+echo "$DIR/llvm/$CMAKE_DIR/bin/clang $CFLAGS"
+

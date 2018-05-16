@@ -1,0 +1,36 @@
+NGX_PREFIX=/home/david/MemGuard/examples/nginx-1.14.0_
+NGX_SUFFIX=/objs/nginx
+
+sudo "$NGX_PREFIX"vanilla$NGX_SUFFIX -s stop
+
+for FILE in 1K 2K 4K 8K 16K 32K 64K 128K 256K 512K 1M 2M 4M 8M 16M
+do
+    head -c $FILE /dev/urandom > ~/nginx/html/$FILE
+done
+
+echo "Nginx Stress Test Results (ab -c \$CONCURRENCY -t 60 -q localhost/\$FILE)" | tee nginx_results
+
+for NGX in vanilla vanilla memguard memguard_i memguard_s
+do
+    SERVER=$NGX_PREFIX$NGX$NGX_SUFFIX
+    sudo $SERVER
+
+    echo "" | tee -a nginx_results
+    echo "Using $NGX nginx" | tee -a nginx_results
+    echo "CONCURRENCY FILESIZE BANDWIDTH" | tee -a nginx_results
+
+    for CONCURRENCY in 1 2 4 8 16 32 64 128 256 512
+    do
+        for FILE in 1K 2K 4K 8K 16K 32K 64K 128K 256K 512K 1M 2M 4M 8M
+        do
+            RES=$NGX_${CONCURRENCY}cs_$FILE.txt
+            ab -c $CONCURRENCY -t 60 -q localhost/$FILE > $RES
+            echo -n "$CONCURRENCY $FILE " | tee -a nginx_results
+            grep "Transfer rate" $RES | awk '{print $3}' | tee -a nginx_results
+            $ rm $RES
+        done
+    done
+
+    sudo $SERVER -s stop
+
+done

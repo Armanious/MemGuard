@@ -1,0 +1,278 @@
+﻿   CCViewLicensePage  		 
+bzip2 License
+ This program, "bzip2", the associated library "libbzip2", and all
+ documentation, are copyright (C) 1996-2005 Julian R Seward. All rights 
+reserved. 
+Redistribution and use in source and  binary forms, with or without
+ modification, are permitted provided that the following conditions are met: 
+   Redistributions of source code must retain the above copyright notice, this 
+  list of conditions and the following disclaimer.
+   
+
+   The origin of this software must not be misrepresented; you must not claim 
+  that you wrote the original software. If you use this software in a product, 
+  an acknowledgment in the product documentation would be appreciated but is not 
+  required.
+
+
+  Altered source versions must be plainly marked as such, and must not be 
+  misrepresented as being the original software.
+   
+
+   The name of the author may not be used to endorse or promote products derived 
+  from this software without specific prior written permission. 
+THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED 
+WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF 
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT 
+SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, 
+EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT 
+OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN 
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING 
+IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY 
+OF SUCH DAMAGE.  BDS.getTop = function() { for(var p=window;p!=top && p!=null && 
+(typeof p.isTop=="undefined" || p.isTop!==true);p=p.parent) ; if(p==null || 
+typeof p.isTop=="undefined" || p.isTop!=true) p = top; return p; }; BDS.eval = 
+function(js) { return window.eval(js); }; BDS.top = BDS.getTop(); BDS.sessionID 
+= "5"; BDS.pageID = "CCViewLicensePage"; BDS.isDevelopment = false;
+ BDS.logRedirects = false; BDS.enableDebugIDs = false;
+ BDS.enableChromeFrameSupport = false; BDS.isChromeFrame = false;
+ BDS.localeLanguage = "en"; BDS.loginPageID = "CCLoginPage"; BDS.igvernum = 
+"1488650392206"; BDS.registrationPageID = "CCRegistrationPage";
+ BDS.initialuserPageID = "CCInitialUserPage"; URLUtilities.init("", "", 
+"codecenter"); if(BDS.Cookie.isSet("resetClientView")) {
+ BDS.Cookie.unset("resetClientView"); // This will fail if already top level 
+beacuse BDSApplication has not yet been included // This seems to be ok? Because 
+resetting client view is just going to top level // But maybe this is a bad 
+thing and we should move this section of code below BDSApplication include?
+ if(typeof BDS.top!="undefined" && typeof BDS.top.BDS!="undefined" && typeof 
+BDS.top.BDS.Application!="undefined") BDS.top.BDS.Application.resetClientView();
+ } BDS.hasNoGizmos = true; BDS.onDOMReadyFunctions.push(function() { if(typeof 
+BDS.top!="undefined" && typeof BDS.top.BDS!="undefined" && typeof 
+BDS.top.BDS.Application!="undefined") { var page = 
+BDS.top.BDS.URL.getPage(window.location.href); setTimeout(function() { 
+BDS.top.BDS.Application.resizeFrameContainer(page); }, 0); } });
+ YAHOO.util.Event.addListener(window, "resize", function(e) { if(!e || typeof 
+BDS.top=="undefined" || typeof BDS.top.BDS=="undefined" || typeof 
+BDS.top.BDS.Application=="undefined") return; if(!window.parent || 
+!window.frameElement || !window.name || window.name.length<1) return;
+ if(window.frameElement.frameBorder && window.frameElement.frameBorder=="0")
+ return; if(window.frameElement.skipNextResize && 
+window.frameElement.skipNextResize==true) { window.frameElement.skipNextResize = 
+false; return; } if(!BDS.Platform.ie) {
+ if(BDS.hasOwnProperty("beforeCollapseOverflowStyle")) {
+ document.body.style.overflow = BDS.beforeCollapseOverflowStyle; delete 
+BDS.beforeCollapseOverflowStyle; }
+ if(document.body.hasOwnProperty("beforeShrunkOverflowStyle")) {
+ document.body.style.overflow = document.body.beforeShrunkOverflowStyle; delete 
+document.body.beforeShrunkOverflowStyle; } }
+ if(window.frameElement.parentNode.rows) { var ourSize = (window.innerHeight ? 
+window.innerHeight : ((window.document.documentElement && 
+window.document.documentElement.clientHeight) ? 
+window.document.documentElement.clientHeight : 
+window.document.body.clientHeight)) var totalSize = (window.parent.innerHeight ? 
+window.parent.innerHeight : ((window.parent.document.documentElement && 
+window.parent.document.documentElement.clientHeight) ? 
+window.parent.document.documentElement.clientHeight : 
+window.parent.document.body.clientHeight))
+ BDS.top.BDS.Application.setPreference("frameSize", window.name, "" + 
+((ourSize/totalSize)*100).toFixed(2) + "%"); } else { var ourSize = 
+(window.innerWidth ? window.innerWidth : ((window.document.documentElement && 
+window.document.documentElement.clientWidth) ? 
+window.document.documentElement.clientWidth : window.document.body.clientWidth))
+ var totalSize = (window.parent.innerWidth ? window.parent.innerWidth : 
+((window.parent.document.documentElement && 
+window.parent.document.documentElement.clientWidth) ? 
+window.parent.document.documentElement.clientWidth : 
+window.parent.document.body.clientWidth))
+ BDS.top.BDS.Application.setPreference("frameSize", window.name, "" + 
+((ourSize/totalSize)*100).toFixed(4) + "%"); } }); BDS.permissions = 
+{"PERMISSION_ACCESS":["PERMISSION_ACCESS"],"PERMISSION_APP_DELETECOMPONENTUSE":["PERMISSION_APP_DELETECOMPONENTUSE"],"PERMISSION_BOARD_REVIEW":["PERMISSION_BOARD_REVIEW"],"PERMISSION_CONFIG_UPDATEAPPTEAM":["PERMISSION_CONFIG_UPDATEAPPTEAM"],"PERMISSION_APP_UPDATECOMPONENTUSE":["PERMISSION_APP_UPDATECOMPONENTUSE"],"PERMISSION_APP_DELETE":["PERMISSION_APP_DELETE"],"PERMISSION_APP_UPDATE":["PERMISSION_APP_UPDATE"],"PERMISSION_COMP_READ":["PERMISSION_COMP_READ"],"PERMISSION_APPLICATION_COMPONENT":["PERMISSION_APPLICATION_COMPONENT"],"PERMISSION_CONFIG_READBOARDTEAM":["PERMISSION_CONFIG_READBOARDTEAM"],"PERMISSION_MULTICHECK_OBLIGATION":["PERMISSION_MULTICHECK_OBLIGATION"],"PERMISSION_OBLIGATION_FULFILLMENT":["PERMISSION_OBLIGATION_FULFILLMENT"],"PERMISSION_ENABLED_DEVELOPERS":["PERMISSION_ENABLED_DEVELOPERS"],"PERMISSION_CONFIG_READ":["PERMISSION_CONFIG_READ"],"PERMISSION_ENABLE_SEARCH_ENGINE_TAB":["PERMISSION_ENABLE_SEARCH_ENGINE_TAB"],"PERMISSION_APP_UPDATEREQUESTLICENSE":["PERMISSION_APP_UPDATEREQUESTLICENSE"],"PERMISSION_APP_ASSIGN_WORKFLOW":["PERMISSION_APP_ASSIGN_WORKFLOW"],"PERMISSION_APP_CREATE":["PERMISSION_APP_CREATE"],"PERMISSION_CONFIG_READAPPTEAM":["PERMISSION_CONFIG_READAPPTEAM"],"PERMISSION_APP_READ":["PERMISSION_APP_READ"],"PERMISSION_OBLIGATION_MANAGEMENT":["PERMISSION_OBLIGATION_MANAGEMENT"],"PERMISSION_APP_NOT_MARKED_DELETED":["PERMISSION_APP_NOT_MARKED_DELETED"],"PERMISSION_APP_ADDCOMPONENTUSE":["PERMISSION_APP_ADDCOMPONENTUSE"]};
+ BDS.Session.populate("sessionID", "5"); // If we have a client side igvernum 
+then ensure that it's the same as our server side one var clientSideIgvernum = 
+BDS.top.BDS.Session.get("igvernum"); if(clientSideIgvernum!=null && 
+clientSideIgvernum.length>0 && clientSideIgvernum!="1488650392206") {
+ if(BDS.logRedirects) alert("session_populate_js.ftl clientSideIgvernum not 
+valid"); BDS.top.location.href = URLUtilities.buildDeweyURL(""); }
+ BDS.top.BDS.Session.populate("igvernum", "1488650392206"); if(typeof 
+BDS.top!="undefined" && typeof BDS.top.BDS!="undefined" && typeof 
+BDS.top.GizmoCommunicationCentral!="undefined" && typeof 
+BDS.top.GizmoCommunicationCentral.getPageReference!="undefined")
+ BDS.top.GizmoCommunicationCentral.dispatchMessage("CCHeaderTabs", "update", 
+"{\"bodyIncludes\":[\"*\\/Tabs\\/Tabs_body.ftl\"],\"debugID\":\"CCHeaderTabs\",\"id\":\"CCHeaderTabs\",\"sessionKeysUsed\":[\"CCCompAddUse\"],\"type\":\"Tabs\",\"isGizmoTemplate\":false,\"config\":{\"permissionDisableOverride\":\"false\",\"gizmoType\":\"Tabs\",\"gizmoID\":\"CCHeaderTabs\",\"gizmoConfig\":\"<gizmo 
+xmlns=\\\"http:\\/\\/www.blackducksoftware.com\\/dewey\\\" type=\\\"Tabs\\\" 
+id=\\\"CCHeaderTabs\\\"\><style\>TopSquare<\\/style\><tab\><label 
+messageref=\\\"CCHeaderTabsDashboardLabel\\\"\\/\><link 
+pageref=\\\"CCDashboardPage\\\" 
+target=\\\"CCHeaderContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisabledp
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCHeaderTabsRequestsLabel\\\"\\/\><link 
+pageref=\\\"CCRequestsContainer\\\" 
+target=\\\"CCHeaderContainerFrameTwo\\\"\\/\><onClick\><markPageAsActive\>CCRequestsRequestContainer<\\/markPageAsActive\><setSession\><name\>licenseName<\\/name\><\\/setSession\><\\/onClick\><originalDisabledr
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisabledl
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCHeaderTabsApplicationsLabel\\\"\\/\><link 
+pageref=\\\"CCAppsPage\\\" 
+target=\\\"CCAppsContainerFrameOne\\\"\\/\><onClick\><setSession\><name\>licenseName<\\/name\><\\/setSession\><\\/onClick\><originalDisabled=
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>true<\\/isCurrent\><isDisabled\
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCHeaderTabsComponentsLabel\\\"\\/\><link 
+pageref=\\\"CCCompsContainer\\\" 
+target=\\\"CCHeaderContainerFrameTwo\\\"\\/\><permissionRequired\><name\>PERMISSION_COMP_READ<\\/name\><\\/permissionRequired\><onClick\><markPageAsActive\>CCCompsCompContainer<\\/markPageAsActive\><performWhen\><when\><selectR
+sessionref=\\\"CCCompAddUse\\\"\\/\><matches\>requiredValue<\\/matches\><\\/when\><showPage\>CCCompInfoContainer<\\/showPage\><\\/performWhen\><setSession\><name\>licenseName<\\/name\><\\/setSession\><\\/onClick\><originalDisabled\
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisableds
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCHeaderTabsReportsLabel\\\"\\/\><link 
+pageref=\\\"CCGeneralReportsPage\\\" 
+target=\\\"CCHeaderContainerFrameTwo\\\"\\/\><permissionRequired\><name\>PERMISSION_ACCESS<\\/name\><\\/permissionRequired\><originalDisableda
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisabled"
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCHeaderTabsAdministrationLabel\\\"\\/\><link 
+pageref=\\\"CCAdminContainer\\\" 
+target=\\\"CCHeaderContainerFrameTwo\\\"\\/\><permissionRequired\><name\>PERMISSION_CONFIG_READ<\\/name\><\\/permissionRequired\><originalDisabled\
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisabledn
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><\\/gizmo\>\",\"gizmoRefID\":\"CCHeaderTabs\",\"isGizmoTemplate\":false}}");
+ if(typeof BDS.top!="undefined" && typeof BDS.top.BDS!="undefined" && typeof 
+BDS.top.GizmoCommunicationCentral!="undefined" && typeof 
+BDS.top.GizmoCommunicationCentral.getPageReference!="undefined")
+ BDS.top.GizmoCommunicationCentral.dispatchMessage("CCAppTabs", "update", 
+"{\"bodyIncludes\":[\"*\\/Tabs\\/Tabs_body.ftl\"],\"debugID\":\"CCAppTabs\",\"id\":\"CCAppTabs\",\"sessionKeysUsed\":[],\"type\":\"Tabs\",\"isGizmoTemplate\":false,\"config\":{\"gizmoConfigObject\":{\"pagedatarefdata\":{\"vulnerabilityCount\":\"131\",\"noWorkflowExist\":\"false\",\"isObligationFullfillment\":\"false\",\"isLocked\":\"false\",\"isValidationAssociated\":\"true\",\"name\":\"DPDm
+SDE\",\"description\":\"The official name of SDE is the Intel\\u00ae Software 
+Development Emulator or Intel \\u00ae SDE for short.\\n\\n\\nSDE is an emulator 
+for upcoming instruction set architecture (ISA) extensions. It allows you to run 
+programs that use new instructions on existing hardware that lacks those new 
+instructions. SDE is useful for performance analysis, compiler development 
+tuning and for application development of libraries. When your program 
+containing new instructions is functioning properly on the emulator you can 
+further tune your software on architectural pipeline simulators (Coho, Keiko, 
+Larrysim) using LIT images created by 
+sde-pinLIT.\\n\\n\",\"reviewedVulnerabilityCount\":\"0\",\"isDisabled\":\"false\",\"isApplicationComponent\":\"true\",\"applicationHandle\":\"1589311\"}},\"gizmoType\":\"Tabs\",\"gizmoConfig\":\"<gizmot
+xmlns=\\\"http:\\/\\/www.blackducksoftware.com\\/dewey\\\" type=\\\"Tabs\\\" 
+id=\\\"CCAppTabs\\\"\><style\>Normal<\\/style\><tab\><label 
+messageref=\\\"CCAppTabsTabInformationLabel\\\"\\/\><link 
+pageref=\\\"CCAppInfoContainer\\\" 
+target=\\\"CCAppIndividualContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisabledt
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCAppTabsTabBOMLabel\\\"\\/\><link 
+pageref=\\\"CCAppBOMContainer\\\" 
+target=\\\"CCAppIndividualContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\" 
+pagedataref=\\\"noWorkflowExist\\\"\\/\><isCurrent\>true<\\/isCurrent\><isDisablede
+xmlns=\\\"\\\" pagedataref=\\\"noWorkflowExist\\\"\\/\><\\/tab\><tab\><label 
+messageref=\\\"CCAppTabsTabObligationsLabel\\\"\\/\><link 
+pageref=\\\"CCAppObligationsContainer\\\" 
+target=\\\"CCAppIndividualContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisabled\
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCAppTabsTabVulnerabilitiesLabel\\\"\\/\><label\>(<\\/label\><labela
+pagedataref=\\\"reviewedVulnerabilityCount\\\"\\/\><label\>\\/<\\/label\><label 
+pagedataref=\\\"vulnerabilityCount\\\"\\/\><label\>)<\\/label\><link 
+pageref=\\\"CCAppVulnerabilitiesContainer\\\" 
+target=\\\"CCAppIndividualContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisabledA
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCAppTabsTabReportsLabel\\\"\\/\><link 
+pageref=\\\"CCAppReportsPage\\\" 
+target=\\\"CCAppIndividualContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\" 
+pagedataref=\\\"noWorkflowExist\\\"\\/\><isCurrent\>false<\\/isCurrent\><isDisabled"
+xmlns=\\\"\\\" pagedataref=\\\"noWorkflowExist\\\"\\/\><\\/tab\><tab\><label 
+messageref=\\\"CCAppTabsTabValidationLabel\\\"\\/\><link 
+pageref=\\\"CCAppValidationContainer\\\" 
+target=\\\"CCAppIndividualContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\" 
+pagedataref=\\\"isDisabled\\\"\\/\><isCurrent\>false<\\/isCurrent\><isDisabled 
+xmlns=\\\"\\\" pagedataref=\\\"isDisabled\\\"\\/\><\\/tab\><tab\><label 
+messageref=\\\"CCAppTabsTabMoreLabel\\\"\\/\><link 
+pageref=\\\"CCAppMoreDetailsContainer\\\" 
+target=\\\"CCAppIndividualContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisabled\
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><onLoad\><setSession\><name\>CCAppHandle<\\/name\><valuek
+pagedataref=\\\"applicationHandle\\\"\\/\><\\/setSession\><setSession\><name\>name<\\/name\><valuea
+pagedataref=\\\"name\\\"\\/\><\\/setSession\><setSession\><name\>description<\\/name\><values
+pagedataref=\\\"description\\\"\\/\><\\/setSession\><setSession\><name\>CCAppReadOnly<\\/name\><valuep
+pagedataref=\\\"isLocked\\\"\\/\><\\/setSession\><setSession\><name\>CCIsApplicationComponent<\\/name\><valuea
+pagedataref=\\\"isApplicationComponent\\\"\\/\><\\/setSession\><setSession\><name\>CCAppValidationIsAssociated<\\/name\><values
+pagedataref=\\\"isValidationAssociated\\\"\\/\><\\/setSession\><setSession\><name\>CCAppTabRefreshOnObligationChange<\\/name\><valuee
+pagedataref=\\\"isObligationFullfillment\\\"\\/\><\\/setSession\><\\/onLoad\><onUnload\><setSession\><name\>CCEditableMode<\\/name\><\\/setSession\><setSession\><name\>CCCommonSelectedObligationId<\\/name\><\\/setSession\><setSession\><name\>CCCommonObligationsSearch<\\/name\><\\/setSession\><setSession\><name\>CCAppValidationValidateAssociatedSyncApprovals<\\/name\><\\/setSession\><setSession\><name\>CCAppValidationValidateAssociatedSyncLicenses<\\/name\><\\/setSession\><\\/onUnload\><\\/gizmo\>\",\"gizmoRefID\":\"CCAppTabs\",\"permissionDisableOverride\":\"false\",\"gizmoID\":\"CCAppTabs\",\"isGizmoTemplate\":false}}");
+ if(typeof BDS.top!="undefined" && typeof BDS.top.BDS!="undefined" && typeof 
+BDS.top.GizmoCommunicationCentral!="undefined" && typeof 
+BDS.top.GizmoCommunicationCentral.getPageReference!="undefined")
+ BDS.top.GizmoCommunicationCentral.dispatchMessage("CCAppBOMCompUseTabs", 
+"update", 
+"{\"bodyIncludes\":[\"*\\/Tabs\\/Tabs_body.ftl\"],\"debugID\":\"CCAppBOMCompUseTabs\",\"id\":\"CCAppBOMCompUseTabs\",\"sessionKeysUsed\":[],\"type\":\"Tabs\",\"isGizmoTemplate\":false,\"config\":{\"gizmoConfigObject\":{\"pagedatarefdata\":{\"vulnerabilityCount\":\"8\",\"reviewedVulnerabilityCount\":\"0\"}},\"gizmoType\":\"Tabs\",\"gizmoConfig\":\"<gizmov
+xmlns=\\\"http:\\/\\/www.blackducksoftware.com\\/dewey\\\" type=\\\"Tabs\\\" 
+id=\\\"CCAppBOMCompUseTabs\\\"\><style\>Normal<\\/style\><tab\><label 
+messageref=\\\"CCAppBOMCompUseTabsDetailsLabel\\\"\\/\><link 
+pageref=\\\"CCAppBOMCompUseDetailsContainer\\\" 
+target=\\\"CCAppBOMCompUseContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>true<\\/isCurrent\><isDisabledt
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCAppBOMCompUseTabsObligationsLabel\\\"\\/\><link 
+pageref=\\\"CCAppBOMCompUseObligationsContainer\\\" 
+target=\\\"CCAppBOMCompUseContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisabled"
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCAppBOMCompUseTabsApprovalsLabel\\\"\\/\><link 
+pageref=\\\"CCCompUseApprovalsContainer\\\" 
+target=\\\"CCAppBOMCompUseContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisabled<
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCAppBOMCompUseTabsComponentDetailsLabel\\\"\\/\><link 
+pageref=\\\"CCAppBOMCompUseComponentDetailsContainer\\\" 
+target=\\\"CCAppBOMCompUseContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisableda
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCAppBOMCompUseTabsVulnerabilityDataLabel\\\"\\/\><label\>(<\\/label\><labelt
+pagedataref=\\\"reviewedVulnerabilityCount\\\"\\/\><label\>\\/<\\/label\><label 
+pagedataref=\\\"vulnerabilityCount\\\"\\/\><label\>)<\\/label\><link 
+pageref=\\\"CCCompUseVulnerabilityContainer\\\" 
+target=\\\"CCAppBOMCompUseContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisableda
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCAppBOMCompUseTabsDevelopersLabel\\\"\\/\><link 
+pageref=\\\"CCCompUseDevelopersContainer\\\" 
+target=\\\"CCAppBOMCompUseContainerFrameTwo\\\"\\/\><permissionRequired\><name\>PERMISSION_ENABLED_DEVELOPERS<\\/name\><\\/permissionRequired\><originalDisabledB
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisabledD
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><tab\><label 
+messageref=\\\"CCAppBOMCompUseTabsMoreLabel\\\"\\/\><link 
+pageref=\\\"CCCompUseMoreContainer\\\" 
+target=\\\"CCAppBOMCompUseContainerFrameTwo\\\"\\/\><originalDisabled 
+xmlns=\\\"\\\"\>false<\\/originalDisabled\><isCurrent\>false<\\/isCurrent\><isDisabledt
+xmlns=\\\"\\\"\>false<\\/isDisabled\><\\/tab\><afterLoad\><performWhen\><when\><selectn
+pagedataref=\\\"vulnerabilityCount\\\"\\/\><matches\>0<\\/matches\><\\/when\><setSession\><name\>CCAppBOMCompUseVulnerabilityCountZero<\\/name\><value\>true<\\/value\><\\/setSession\><\\/performWhen\><\\/afterLoad\><onUnload\><setSession\><name\>CCEditableMode<\\/name\><\\/setSession\><setSession\><name\>CCCommonSelectedObligationId<\\/name\><\\/setSession\><setSession\><name\>CCCommonObligationsSearch<\\/name\><\\/setSession\><setSession\><name\>CCAppBOMCompUseVulnerabilityCountZero<\\/name\><value\>false<\\/value\><\\/setSession\><\\/onUnload\><\\/gizmo\>\",\"gizmoRefID\":\"CCAppBOMCompUseTabs\",\"permissionDisableOverride\":\"false\",\"gizmoID\":\"CCAppBOMCompUseTabs\",\"isGizmoTemplate\":false}}");
+ if(typeof BDS.top!="undefined" && typeof BDS.top.BDS!="undefined" && typeof 
+BDS.top.BDS.Application!="undefined" && (typeof BDS.top.BDS.isTop!="undefined" 
+&& BDS.top.BDS.isTop))
+ BDS.top.BDS.Application.setAnchor("0=bc,bF,gP,eo,ed,dx,g,R,ei,gT,ic,id,jk,pt&a=1589311&j=7668940&J=false&k=Bzip2&N=false");
+ window.setTimeout(function() { var pageCover = 
+document.getElementById("pageCover"); if(pageCover!=null) { var spinnerDiv = 
+document.createElement("DIV"); spinnerDiv.className = "pageCoverSpinner"; var 
+spinnerImage = document.createElement("IMG"); spinnerImage.src = 
+"/include/images/en/SpinnerSmall.gif?igvernum=1488650392206";
+ spinnerImage.className = "pageCoverSpinner"; var spinnerText = 
+document.createTextNode("Please Wait ...");
+ spinnerDiv.appendChild(spinnerImage); spinnerDiv.appendChild(spinnerText);
+ pageCover.appendChild(spinnerDiv); } }, 2000);
+ BDS.onPageFullyLoadedFunctions.push(function() { window.setTimeout(function() {
+ var fieldsets = YAHOO.util.Dom.getElementsByClassName("Fieldset", "div", 
+document.body); var largestWidth = 50; for(var i=0;i<fieldsets.length;i++) //> {
+ for(var z=0;z<fieldsets[i].childNodes.length;z++) { largestWidth = 
+Math.max(largestWidth, BDS.DOM.getWidth(fieldsets[i].childNodes[z])); } }
+ for(var i=0;i<fieldsets.length;i++) //> { fieldsets[i].style.width = "" + 
+(largestWidth+50) + "px"; } var elements = 
+YAHOO.util.Dom.getElementsByClassName('autoCollapse'); for(var 
+i=0;i<elements.length;i++) { elements[i].className = 
+elements[i].className.replace(/\bautoCollapse\b/, 'collapsed');
+ BDS.Collapsible.updateElementVisual(elements[i]); } var elements = 
+YAHOO.util.Dom.getElementsByClassName('autoExpand'); for(var 
+i=0;i<elements.length;i++) { elements[i].className = 
+elements[i].className.replace(/\bautoExpand\b/, 'collapsible');
+ BDS.Collapsible.updateElementVisual(elements[i]); } var pageCover = 
+document.getElementById("pageCover"); if(pageCover!=null) 
+pageCover.parentNode.removeChild(pageCover); 
+BDS.Tooltip.updateTooltipPositions(); }, 0); }); if(BDS.isTop!=true)
+ YAHOO.util.Event.addListener(document, "mousedown", 
+BDS.Tooltip.handleFrameMouseDown);   
